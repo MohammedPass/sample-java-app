@@ -6,13 +6,14 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
 
-        AWS_S3_BUCKET = "repo-backet"
+        AWS_S3_BUCKET = "artefact-bucket-repo"
         ARTIFACT_NAME = "hello-world.war"
-        AWS_EB_APP_NAME = "mohammedeid-java-webapp"
+        AWS_EB_APP_NAME = "java-webapp"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
-        AWS_EB_ENVIRONMENT = "Mohammedeidjavawebapp-env"
+        AWS_EB_ENVIRONMENT = "Javawebapp-env"
 
-
+        SONAR_IP = "54.226.50.200"
+        SONAR_TOKEN = "sqp_061de788cd3f81652f83f6705732b9c63db702f8"
 
     }
 
@@ -49,6 +50,16 @@ pipeline {
             }
         }
 
+        stage('Quality Scan'){
+            steps {
+                sh '''
+                mvn clean verify sonar:sonar \
+                    -Dsonar.projectKey=Mohammed_Eid \
+                    -Dsonar.host.url=http://$SONAR_IP \
+                    -Dsonar.login=$SONAR_TOKEN
+                '''
+            }
+        }
 
         stage('Package') {
             steps {
@@ -61,7 +72,7 @@ pipeline {
                 success {
                     archiveArtifacts artifacts: '**/target/**.war', followSymlinks: false
 
-                
+
                 }
             }
         }
