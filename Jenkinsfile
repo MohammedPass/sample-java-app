@@ -8,9 +8,9 @@ pipeline {
 
         AWS_S3_BUCKET = "repo-backet"
         ARTIFACT_NAME = "hello-world.war"
-        AWS_EB_APP_NAME = "mohammedeid-java-webapp"
+        AWS_EB_APP_NAME = "mohammedeid-java"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
-        AWS_EB_ENVIRONMENT = "Mohammedeidjavawebapp-env"
+        AWS_EB_ENVIRONMENT = "Mohammedeidjava-env"
 
 
     }
