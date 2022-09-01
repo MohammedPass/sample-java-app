@@ -8,9 +8,9 @@ pipeline {
 
         AWS_S3_BUCKET = "repo-backet"
         ARTIFACT_NAME = "hello-world.war"
-        AWS_EB_APP_NAME = "mohammedeid-java"
+        AWS_EB_APP_NAME = "samblejavaapp"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
-        AWS_EB_ENVIRONMENT = "Mohammedeidjava-env"
+        AWS_EB_ENVIRONMENT = "Samblejavaapp-env"
 
 
     }
@@ -48,7 +48,7 @@ pipeline {
             }
         }
 
-        stage('Quality Scan'){
+      /*  stage('Quality Scan'){
             steps {
                 sh '''
                 mvn clean verify sonar:sonar \
@@ -58,7 +58,7 @@ pipeline {
                 '''
             }
         }
-
+*/
         stage('Package') {
             steps {
                 
